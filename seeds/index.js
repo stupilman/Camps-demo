@@ -3,6 +3,7 @@ const cities = require('./cities');
 const { places, descriptors } = require('./seedHelpers');
 const Campground = require('../models/campground');
 const axios = require('axios');
+require('dotenv').config();
 
 mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp-second')
   .then(() => {
@@ -18,7 +19,7 @@ const getRandomImageUrl = async () => {
   try {
     const res = await axios.get('https://api.unsplash.com/photos/random', {
       headers: {
-        Authorization: 'Client-ID Sy5lSQB_vz4UudF1uOeuFx-3JD-6VUOLkQMSbYFOW2M',
+        Authorization: `Client-ID ${process.env.UNSPLASH_KEY}`,
       },
       params: {
         query: 'camping', // 원하는 테마 키워드 (optional)
